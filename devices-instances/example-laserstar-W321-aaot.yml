@@ -46,7 +46,7 @@ thingEndPoint: example-laserstar-W321--aaot-download.yml
 mobile: false
 insitu: true
 
-# This is the scheduled time beetween two sequential succesful request to the endpoint, is used like a timer to schedule the download attemps from the remote andpoint.
+# This is the scheduled time beetween two sequential succesful request to the endpoint, is used like a timer to schedule the download attemps from the remote endpoint.
 # For some endpoint (like MQTT cases) is not used.
 # This isn't the time used for retry request in case of failure.
 # In case of retry the time between two attemps is a fraction of this time.
