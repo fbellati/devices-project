@@ -1,9 +1,9 @@
+# This file support the concept TEMPLATE OF DEVICE.
+# The template of a device define various characteristics of the device and support a single model with differents firmware and profiles (see later).
+# The properties described HERE (on the template) are indipendent from the single INSTANCE of a device like one installed in a particular site. So these characteristics are generic and refere to all the sensor with same manufacturer and model.
 # This is the description file in YAML format of a single template of a single device.
 # The device can be a single sensor device or a device made by multiple sensors.
 # Every sensor must have a ObservedProperty and unit of Measure.
-# This file support the concept TEMPLATE OF DEVICE.
-# The template of a device define various characteristics of the device and support a single model with differents firmware and profiles (see later).
-# The properties described HERE (on the template) are indipendent from the single INSTANCE of a device like one installed in a particular site. Sothese characteristics are generic and refere to all the sensor with same manufacturer and model.
 
 # This is the version of the description file
 fileFormatVersion: 2.0
