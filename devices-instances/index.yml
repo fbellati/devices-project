@@ -1,3 +1,2 @@
-istances:
-  name: virt-combined-sensor-comve-instance
-
+instances:
+  - name: example-laserstar-W321-aaot
