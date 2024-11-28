@@ -130,10 +130,10 @@ components:
       featureOfInterestDescription: Offshore Tower Acqua Alta on the instrument mast in air at elevation of 23meters over the MSL
       # Coordinates in format WGS84 as goe+json object
       # DO NOT CHANGE - The locationEncodingType is fixed on sensorthings api
-      locationEncodingType: 'application/geo+json'
+      featureOfInterestEncodingType: 'application/geo+json'
       # string, array of flotingpoint - MANDATORY
       # geo+json support various type of schemes: Point, Area etc. Read the sensorthings api documentation for more infos
-      locationGeometry: Point
+      featureOfInterestGeometry: Point
       featureOfInterestCoordinates: [12.5082833, 45.3138333]
       # integer (also negative) - OPTIONAL
       featureOfInterestElevation: 23
@@ -183,10 +183,10 @@ components:
       featureOfInterestDescription: Offshore Tower Acqua Alta on the instrument mast in air at elevation of 23meters over the MSL
       # Coordinates in format WGS84 as goe+json object
       # DO NOT CHANGE - The locationEncodingType is fixed on sensorthings api
-      locationEncodingType: 'application/geo+json'
+      featureOfInterestEncodingType: 'application/geo+json'
       # string, array of flotingpoint - MANDATORY
       # geo+json support various type of schemes: Point, Area etc. Read the sensorthings api documentation for more infos
-      locationGeometry: Point
+      featureOfInterestGeometry: Point
       featureOfInterestCoordinates: [12.5082833, 45.3138333]
       # integer (also negative) - OPTIONAL
       featureOfInterestElevation: 23
@@ -236,10 +236,10 @@ components:
       featureOfInterestDescription: Offshore Tower Acqua Alta on the instrument mast in air at elevation of 23meters over the MSL
       # Coordinates in format WGS84 as goe+json object
       # DO NOT CHANGE - The locationEncodingType is fixed on sensorthings api
-      locationEncodingType: 'application/geo+json'
+      featureOfInterestEncodingType: 'application/geo+json'
       # string, array of flotingpoint - MANDATORY
       # geo+json support various type of schemes: Point, Area etc. Read the sensorthings api documentation for more infos
-      locationGeometry: Point
+      featureOfInterestGeometry: Point
       featureOfInterestCoordinates: [12.5082833, 45.3138333]
       # integer (also negative) - OPTIONAL
       featureOfInterestElevation: 23

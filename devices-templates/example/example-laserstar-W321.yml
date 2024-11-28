@@ -158,7 +158,7 @@ firmwareVersions:
             # MANDATORY
             observedPropertyName: x_wind
             observedPropertyDefinition: http://vocab.nerc.ac.uk/collection/P07/current/CFSN0042/
-            observedPropertyDescription: "x" indicates a vector component along the grid x-axis, positive with increasing x. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.)
+            observedPropertyDescription: x indicates a vector component along the grid x-axis, positive with increasing x. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.)
             observedPropertyProperties: {"note":"The X-Direction is aligned with the N spar"}
             # MANDATORY
             unitOfMeasurement:
@@ -194,7 +194,7 @@ firmwareVersions:
             # MANDATORY
             observedPropertyName: y_wind
             observedPropertyDefinition: https://vocab.nerc.ac.uk/collection/P07/current/CFSN0043/
-            observedPropertyDescription: "y" indicates a vector component along the grid y-axis, positive with increasing y. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.)
+            observedPropertyDescription: y indicates a vector component along the grid y-axis, positive with increasing y. Wind is defined as a two-dimensional (horizontal) air velocity vector, with no vertical component. (Vertical motion in the atmosphere has the standard name upward_air_velocity.)
             observedPropertyProperties: {"note":"The X-Direction si aligned with the N spar"}
             unitOfMeasurement:
               unitOfMeasurementName: Metres per second
@@ -222,7 +222,8 @@ firmwareVersions:
             # MANDATORY
             observedPropertyName: Upward air velocity
             observedPropertyDefinition: https://vocab.nerc.ac.uk/standard_name/upward_air_velocity/
-            observedPropertyDescription: A velocity is a vector quantity. "Upward" indicates a vector component which is positive when directed upward (negative downward). Upward air velocity is the vertical component of the 3D air velocity vector. The standard name downward_air_velocity may be used for a vector component with the opposite sign convention.
+            observedPropertyDescription: A velocity is a vector quantity. Upward indicates a vector component which is positive when directed upward (negative downward). Upward air velocity is the vertical component of the 3D air velocity vector. The standard name downward_air_velocity may be used for a vector component with the opposite sign convention.
+            unitOfMeasurement:
               unitOfMeasurementName: Metres per second
               unitOfMeasurementSymbol: m/s
               unitOfMeasurementDefinition: https://vocab.nerc.ac.uk/collection/P06/current/UVAA/
