@@ -1,0 +1,245 @@
+# This is the description file in YAML format of a single instance of a single template device.
+# This file support the concept of INSTANCE OF A SINGLE DEVICE.
+# The instance refer to a single device template at a time.
+# An istances of a device template must contain all the sensors component defined in the template
+# An instance must have only a single endpoint (see later: "thingEndPoint:") defined as datasource of observation measurement.
+
+# This is the version of the description file
+fileFormatVersion: 2.0
+
+# This part refer to a template of a device. All following keys are used to identify the correct reference template
+# All these key are MANDATORY to identify the corrects components of your device
+# You CANNOT have two instances with the same name.
+# The manufacturerUid refer to the uid of the manufacturer defined thru the index.yml file in the root directory of the devices template repository
+# The deviceTemplate refer to the key "deviceName:" of the template device. It correspond to the filename of the device (without extension) inside the directory of the manufacturer
+# firmwareVersion refer to the specific version of your firmware defined in the template file of the device under the key "firmwareVersions:"
+# profile refer to the specific profile defined in the template file of the device under the key "profiles:"
+
+# string - MANDATORY
+manufacturerUid: example
+# string - MANDATORY
+deviceTemplate: example-laserstar-W321
+# string - MANDATORY
+firmwareVersion: V2.2.0
+# string - MANDATORY
+profile: default
+
+# This key is optional but very useful to identify correctly the sensor. This is reported on the sensorthings api in the properties filed of the thing
+# string - OPTIONAL
+serialNumber: "210303AU"
+
+# These keys are referred to the same fields of the concept of things in senssorthings api.
+# The thing name can include spaces, max 255 characters.
+# The thing description can include spaces, max 255 characters.
+# Normally the thingName is similar to the device name used on the template but is referred to the specific installation. For example you can add a acronym for the position
+# string - MANDATORY
+thingName: laserstar 3D Anemometer on AAOT
+# string - OPTIONAL
+thingDescription: 3-axis ultrasonic anemometers (wind sensors) with 50Hz output rate, in Acqua Alta Ocean Tower
+
+# This key refer to the yml file where are contained the sensible informations about the instance like password or certificates used to access the data. You MUST put the file in the "secrets" directory.
+# string - MANDATORY
+thingEndPoint: example-laserstar-W321--aaot-download.yml
+
+# These keys at the moment are not in use, but are useful to support instances of devices in the future
+# boolean - OPTIONAL
+mobile: false
+insitu: true
+
+# This is the scheduled time beetween two sequential succesful request to the endpoint, is used like a timer to schedule the download attemps from the remote andpoint.
+# For some endpoint (like MQTT cases) is not used.
+# This isn't the time used for retry request in case of failure.
+# In case of retry the time between two attemps is a fraction of this time.
+# The time is expressed in minutes
+# integer - MANDATORY
+downloadInterval: 1440
+
+# This field define how many DAYS backwards the system can retrive data from the device to look for a piece of dataif not already downloaded.
+# If the system detects a lack of data in sensorthing api for various reasons, it will try to download the data for a maximum of "x" days, after which it will no longer try because the data by definition will no longer be present.
+# The parameter depends on many device configuration factors such as the amount of installed memory or the sampling frequency.
+# It is strongly discouraged to use values ​​that are too low and not effective. Continuous attempts to download data that is no longer present could cause system problems
+# integer - MANDATORY
+backwardsDownloadWindow: 60
+
+# This parameter is used to correct the phenomenon time recorded (as downloaded) in sensorthing api to UTC. If this field is different from UTC some calculation are made by software to correct the phnomenom time. You must use a string as provided directly from IANA.
+# string - MANDATORY
+observationsTimeZone: CET
+
+# This key refer to the last calibration of the sensors.
+# Due to the variability of calibration procedures an open string type field is available. It is possible to insert additional fields.
+# string - OPTIONAL
+lastCalibration: 15/07/2023
+moreCalibrationInfo:
+myPersonalCalibrationInfos:
+
+# This key refer to a optional "pid" persistent identifier reference to this instance of the device
+# At the moment is supported only -ONE- PID for all instance device sensors.
+# The PID information is published as property of thing in the sensorthing api data-model
+# string - use the correct complete URI format - OPTIONAL
+instancePID:
+
+# This key (or keys) refer to sensor components of the device template
+# Every component must refer to a component of the template. You can refer to a component with the name of the component under the key "componentTemplate:"
+# You must add a location and feature of interest for every component of the instance. Some istruments can measure Phenomena in differents location and for differents features of interest, so is necessary to add ones for every sensor component.
+## Example of the template device part to refer
+##       sensorComponents:
+##         u_axis_velocity_sensor:  <-- THIS IS THE NAME TO REFER
+# strings - MANDATORY
+components:
+    # FIRST COMPONENT
+    - component:
+      # string, active or not. If not set or present the sensor is not active for the system - MANDATORY.
+      state: active
+      # strings - MANDATORY
+      sensorOwner: CNR - ISMAR
+      # This key will be added on properties field
+      # JSON Onject
+      sensorReserchInfrastructures: {"ri": ["DanubiusRI", "eLter"]}
+      # strings - MANDATORY
+      componentTemplate: u_axis_velocity_sensor
+      # This is refer to a part of datastream name in sensorthings api, so is a part of the name people see on the datastream title
+      # The name MUST be unique for an instance
+      # strings - MANDATORY
+      componentName: u_axis wind speed
+      # strings - MANDATORY
+      componentDescription: vector component along the x-axis, aligned with the N spar
+      # This is a Json object where you can add more metadata to the data.
+      # If there isn't present or not populated will be ignored
+      # JSON OBJECT - OPTIONAL
+      dataStreamProperty: {"ECV" : "Atmosphere,Surface:Surface Wind Speed and Direction"}
+
+      # The LOCATION of the sensor, is the physical location of the sensor. Can be different from the feature of interest of the measurement.
+      # Pay attention to the name of the location: if there are duplicated names over your instances, only the first one will be recorded.
+      # The location elevation parameter is OPTIONAL. Without a elevation the value will be on the geoid surface
+      # various format - MANDATORY
+      locationName: AAOT_air_23
+      locationDescription: Offshore Tower Acqua Alta on the instrument mast in air at elevation of 23meters over the MSL
+      # Coordinates in format WGS84 as goe+json object
+      # DO NOT CHANGE - The locationEncodingType is fixed on sensorthings api
+      locationEncodingType: 'application/geo+json'
+      # string, array of flotingpoint - MANDATORY
+      # geo+json support various type of schemes: Point, Area etc. Read the sensorthings api documentation for more infos
+      locationGeometry: Point
+      locationCoordinates: [12.5082833, 45.3138333]
+      # integer (also negative) - OPTIONAL
+      locationElevation: 23
+      
+      # The FEATURE OF INTEREST of the installed sensor.
+      # various format - MANDATORY
+      featureOfInterestName: AAOT_air_23
+      featureOfInterestDescription: Offshore Tower Acqua Alta on the instrument mast in air at elevation of 23meters over the MSL
+      # Coordinates in format WGS84 as goe+json object
+      # DO NOT CHANGE - The locationEncodingType is fixed on sensorthings api
+      locationEncodingType: 'application/geo+json'
+      # string, array of flotingpoint - MANDATORY
+      # geo+json support various type of schemes: Point, Area etc. Read the sensorthings api documentation for more infos
+      locationGeometry: Point
+      featureOfInterestCoordinates: [12.5082833, 45.3138333]
+      # integer (also negative) - OPTIONAL
+      featureOfInterestElevation: 23
+
+
+    # SECOND COMPONENT
+    - component:
+      # string, active or not. If not set or present the sensor is not active for the system - MANDATORY.
+      state: active
+      # strings - MANDATORY
+      sensorOwner: CNR - ISMAR
+      # This key will be added on properties field
+      # JSON Onject
+      sensorReserchInfrastructures: {"ri": ["DanubiusRI", "eLter"]}
+      # strings - MANDATORY
+      componentTemplate: v_axis_velocity_sensor
+      # This is refer to a part of datastream name in sensorthings api, so is a part of the name people see on the datastream title
+      # The name MUST be unique for an instance
+      # strings - MANDATORY
+      componentName: v_axis wind speed
+      # strings - MANDATORY
+      componentDescription: vector component along the y-axis, aligned with the E spar
+      # This is a Json object where you can add more metadata to the data.
+      # If there isn't present or not populated will be ignored
+      # JSON OBJECT - OPTIONAL
+      dataStreamProperty: {"ECV" : "Atmosphere,Surface:Surface Wind Speed and Direction"}
+
+      # The LOCATION of the sensor, is the physical location of the sensor. Can be different from the feature of interest of the measurement.
+      # Pay attention to the name of the location: if there are duplicated names over your instances, only the first one will be recorded.
+      # The location elevation parameter is OPTIONAL. Without a elevation the value will be on the geoid surface
+      # various format - MANDATORY
+      locationName: AAOT_air_23
+      locationDescription: Offshore Tower Acqua Alta on the instrument mast in air at elevation of 23meters over the MSL
+      # Coordinates in format WGS84 as goe+json object
+      # DO NOT CHANGE - The locationEncodingType is fixed on sensorthings api
+      locationEncodingType: 'application/geo+json'
+      # string, array of flotingpoint - MANDATORY
+      # geo+json support various type of schemes: Point, Area etc. Read the sensorthings api documentation for more infos
+      locationGeometry: Point
+      locationCoordinates: [12.5082833, 45.3138333]
+      # integer (also negative) - OPTIONAL
+      locationElevation: 23
+      
+      # The FEATURE OF INTEREST of the installed sensor. 
+      # various format - MANDATORY
+      featureOfInterestName: AAOT_air_23
+      featureOfInterestDescription: Offshore Tower Acqua Alta on the instrument mast in air at elevation of 23meters over the MSL
+      # Coordinates in format WGS84 as goe+json object
+      # DO NOT CHANGE - The locationEncodingType is fixed on sensorthings api
+      locationEncodingType: 'application/geo+json'
+      # string, array of flotingpoint - MANDATORY
+      # geo+json support various type of schemes: Point, Area etc. Read the sensorthings api documentation for more infos
+      locationGeometry: Point
+      featureOfInterestCoordinates: [12.5082833, 45.3138333]
+      # integer (also negative) - OPTIONAL
+      featureOfInterestElevation: 23
+
+
+    # THIRD COMPONENT
+    - component:
+      # string, active or not. If not set or present the sensor is not active for the system - MANDATORY.
+      state: active
+      # strings - MANDATORY
+      sensorOwner: CNR - ISMAR
+      # This key will be added on properties field
+      # JSON Onject
+      sensorReserchInfrastructures: {"ri": ["DanubiusRI", "eLter"]}
+      # strings - MANDATORY
+      componentTemplate: w_axis_velocity_sensor
+      # This is refer to a part of datastream name in sensorthings api, so is a part of the name people see on the datastream title
+      # The name MUST be unique for an instance
+      # strings - MANDATORY
+      componentName: w_axis wind speed
+      # strings - MANDATORY
+      componentDescription: vector component which is positive when directed upward
+      # This is a Json object where you can add more metadata to the data.
+      # If there isn't present or not populated will be ignored
+      # JSON OBJECT - OPTIONAL
+      dataStreamProperty: {"ECV" : "Atmosphere,Surface:Surface Wind Speed and Direction"}
+
+      # The location of the sensor, is the physical location of the sensor. Can be different from the feature of interest of the measurement.
+      # Pay attention to the name of the location: if there are duplicated names over your instances, only the first one will be recorded.
+      # The location elevation parameter is OPTIONAL. Without a elevation the value will be on the geoid surface
+      # various format - MANDATORY
+      locationName: AAOT_air_23
+      locationDescription: Offshore Tower Acqua Alta on the instrument mast in air at elevation of 23meters over the MSL
+      # Coordinates in format WGS84 as goe+json object
+      # DO NOT CHANGE - The locationEncodingType is fixed on sensorthings api
+      locationEncodingType: 'application/geo+json'
+      # string, array of flotingpoint - MANDATORY
+      # geo+json support various type of schemes: Point, Area etc. Read the sensorthings api documentation for more infos
+      locationGeometry: Point
+      locationCoordinates: [12.5082833, 45.3138333]
+      # integer (also negative) - OPTIONAL
+      locationElevation: 23
+      
+      # The feature of Intereset of the installed sensor. 
+      # various format - MANDATORY
+      featureOfInterestName: AAOT_air_23
+      featureOfInterestDescription: Offshore Tower Acqua Alta on the instrument mast in air at elevation of 23meters over the MSL
+      # Coordinates in format WGS84 as goe+json object
+      # DO NOT CHANGE - The locationEncodingType is fixed on sensorthings api
+      locationEncodingType: 'application/geo+json'
+      # string, array of flotingpoint - MANDATORY
+      # geo+json support various type of schemes: Point, Area etc. Read the sensorthings api documentation for more infos
+      locationGeometry: Point
+      featureOfInterestCoordinates: [12.5082833, 45.3138333]
+      # integer (also negative) - OPTIONAL
+      featureOfInterestElevation: 23

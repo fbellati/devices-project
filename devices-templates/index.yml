@@ -1,0 +1,57 @@
+# List of supported vendor's ID,
+
+vendors:
+  - uid: example
+    manufacturer: Example
+    vendorID: 0
+    draft: true
+    
+  - uid: com-ve
+    manufacturer: Comune di Venezia
+    vendorID: 100
+    website: https://www.comune.venezia.it/
+
+  - uid: waterinsight
+    manufacturer: Water Insight
+    vendorID: 105
+    website: https://www.waterinsight.nl/
+    
+  - uid: seabird
+    manufacturer: Sea-Bird Scientific
+    vendorID: 101
+    website: https://www.seabird.com/
+    
+  - uid: davis-instruments
+    manufacturer: Davis Instruments
+    vendorID: 102
+    website: https://www.davisinstruments.com/
+    
+  - uid: nortek-group
+    manufacturer: Nortek Group
+    vendorID: 103
+    website: https://www.nortekgroup.com/
+    
+  - uid: develogic
+    manufacturer: develogic GmbH
+    vendorID: 104
+    website: https://develogic.com/
+
+  - uid: gillinstruments
+    manufacturer: Gill Instruments Limited
+    vendorID: 106
+    website: https://gillinstruments.com/
+
+  - uid: paloma-ts
+    manufacturer: CNR-ISMAR TS
+    vendorID: 107
+    website: https://www.ismar.cnr.it/cosa-facciamo/infrastrutture-oceanografiche/meda-paloma/
+    
+  - uid: baranidesign
+    manufacturer: BARANI DESIGN Technologies s.r.o.
+    vendorID: 108
+    website: https://allmeteo.com/
+    
+  - uid: campbellsci
+    manufacturer: Campbell Scientific, Inc.
+    vendorID: 109
+    website: https://www.campbellsci.com/
